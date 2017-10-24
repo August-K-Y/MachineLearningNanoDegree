@@ -297,6 +297,10 @@ class Environment(object):
         if self.enforce_deadline:
             penalty = (math.pow(gradient, fnc) - 1) / (gradient - 1)
 
+        #
+        # Calculate the violation of action based on the US right-of-way law.
+        #
+        
         # Agent wants to drive forward:
         if action == 'forward':
             if light != 'green': # Running red light
@@ -330,6 +334,10 @@ class Environment(object):
             if light == 'green': 
                 violation = 1 # Minor violation
 
+        #
+        # Calculate the reward based on the violation calculated and 
+        # whether the action is aligned with the next waypoint.
+        #      
 
         # Did the agent attempt a valid move?
         if violation == 0:
